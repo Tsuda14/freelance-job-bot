@@ -69,9 +69,10 @@ class JobScraper:
 
     def fetch_upwork_rss(self, keywords: list[str]) -> list[Job]:
         """Fetch jobs from Upwork RSS feeds."""
+        from urllib.parse import quote_plus
         jobs = []
         for kw in keywords:
-            url = f"https://www.upwork.com/ab/feed/topics/rss?q={kw}&sort=recency"
+            url = f"https://www.upwork.com/ab/feed/topics/rss?q={quote_plus(kw)}&sort=recency"
             try:
                 feed = feedparser.parse(url)
                 for entry in feed.entries[:20]:
